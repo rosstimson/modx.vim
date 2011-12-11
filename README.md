@@ -6,4 +6,5 @@ Vim syntax highlighting support for the [MODX content management system](http://
 
 ## Usage
 To use MODX syntax highlighting just use:
+    
     :set filetype=modx
