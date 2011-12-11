@@ -1,0 +1,39 @@
+<!-- 
+  vim:ft=modx
+-->
+<!-- Example Template -->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;
+    charset=[[++modx_charset]]" />
+  <title>[[++site_name]] | [[*pagetitle]]</title>
+  <link href="[[++base_url]]assets/site/simple.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <div id="header">
+    <div id="logo">
+      [[*longtitle]]
+    </div>
+  </div>
+  <div id="main">
+    [[*content]]
+  </div>
+  <div id="sidebar">
+    [[$SideBar]]
+  </div>
+  <div id="navigation">
+    [[Wayfinder? &startId=`0`]]
+  </div>
+  <div id="news">
+    [[!getResources? &parents=`22` &tpl=`MyGrTpl`]]
+  </div>
+  <p><a href="[[~[[*id]]]]#" >Back to Top</a></p>
+  <p><a href="[[~[[++site_start]]]]" >MODX Home Page</a></p>
+  <div id="footer">
+    [[$Footer]]
+  </div>
+</body>
+</html>
