@@ -13,7 +13,7 @@
 "       Setting Tag             [[++SettingName]]
 "       Language Tag            [[%LanguageStringKey]]
 
-syn region modxTag matchgroup=Type start=+\[\[+ end=+\]\]+ keepend contains=modxResourceTag,modxChunkTag,modxSnippetTag,modxPlaceholderTag,modxLinkTag,modxSettingTag,modxLanguageTag,modxParamName,modxParams,modxCacheable
+syn region modxTag matchgroup=Type start=+\[\[+ end=+\]\]+ keepend contains=modxResourceTag,modxChunkTag,modxSnippetTag,modxPlaceholderTag,modxLinkTag,modxSettingTag,modxLanguageTag,modxParamName,modxParams,modxComment,modxCacheable
 
 syn match modxResourceTag     "\v\*\w*"       contains=modxConditional,modxFunction,modxKeyword contained
 syn match modxChunkTag        "\v\$\w*"       contains=modxConditional,modxFunction,modxKeyword contained
@@ -22,6 +22,7 @@ syn match modxPlaceholderTag  "\v\+\w*"       contains=modxConditional,modxFunct
 syn match modxLinkTag         "\v\~\w*"       contains=modxConditional,modxFunction,modxKeyword contained
 syn match modxSettingTag      "\v\+{2}\w*"    contains=modxConditional,modxFunction,modxKeyword contained
 syn match modxLanguageTag     "\v\%\w*"       contains=modxConditional,modxFunction,modxKeyword contained
+syn match modxComment         "\v\-\w*"       contained
 syn match modxCacheable       "\v!"           contained
 
 "hi def link modxTag               Keyword
@@ -32,6 +33,7 @@ hi def link modxPlaceholderTag    Keyword
 hi def link modxLinkTag           Keyword
 hi def link modxSettingTag        Keyword
 hi def link modxLanguageTag       Keyword
+hi def link modxComment           Comment
 hi def link modxCacheable         Special
 
 " Regexes for Params / Properties / Filters
