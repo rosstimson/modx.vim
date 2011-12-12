@@ -1,27 +1,8 @@
 " Vim syntax file
-" Language: HTML + MODX
+" Language: HTML (extended highlighting for MODX tags)
 " Maintainer: Ross Timson <ross@rosstimson.com>
 " Version: 0.1
-" Last Change: 11 December 2011
-
-" Quit when a syntax file is already loaded.
-if exists("b:current_syntax")
-  finish
-endif
-
-if !exists("main_syntax")
-  let main_syntax = 'modx'
-endif
-
-" Include HTML
-runtime syntax/html.vim
-unlet b:current_syntax
-
-" Add modxTag support into HTML elements
-syn region htmlTag start=+<[^/]+   end=+>+ contains=modxTag,htmlTagN,htmlString,htmlArg,htmlValue,htmlTagError,htmlEvent,htmlCssDefinition,@htmlPreproc,@htmlArgCluster
-syn region  htmlString   contained start=+"+ end=+"+ contains=modxTag,htmlSpecialChar,javaScriptExpression,@htmlPreproc
-syn region  htmlString   contained start=+'+ end=+'+ contains=modxTag,htmlSpecialChar,javaScriptExpression,@htmlPreproc
-
+" Last Change: 12 December 2011
 
 " Regexes for MODX tags (contained within 2 square brackets)
 "       Resource Tag / TV       [[*ResourceField / TvName ]]
@@ -32,16 +13,16 @@ syn region  htmlString   contained start=+'+ end=+'+ contains=modxTag,htmlSpecia
 "       Setting Tag             [[++SettingName]]
 "       Language Tag            [[%LanguageStringKey]]
 
-syn region modxTag matchgroup=Type start=+\[\[+ end=+\]\]+ keepend contains=modxResourceTag,modxChunkTag,modxSnippetTag,modxPlaceholderTag,modxLinkTag,modxSettingTag,modxLanguageTag,modxParams
+syn region modxTag matchgroup=Type start=+\[\[+ end=+\]\]+ keepend contains=modxResourceTag,modxChunkTag,modxSnippetTag,modxPlaceholderTag,modxLinkTag,modxSettingTag,modxLanguageTag,modxParamName,modxParams,modxCacheable
 
-syn match modxResourceTag     "\v\[*]\w"      contains=modxConditional,modxFunction,modxKeyword contained
-syn match modxChunkTag        "\v\[$]\w"      contains=modxConditional,modxFunction,modxKeyword contained
-syn match modxSnippetTag      "\v\w"          contains=modxConditional,modxFunction,modxKeyword contained
-syn match modxPlaceholderTag  "\v[+]\w"       contains=modxConditional,modxFunction,modxKeyword contained
-syn match modxLinkTag         "\v[~]\w"       contains=modxConditional,modxFunction,modxKeyword contained
-syn match modxSettingTag      "\v\+{2}.*\w"   contains=modxConditional,modxFunction,modxKeyword contained
-syn match modxLanguageTag     "\v[%]\w"       contains=modxConditional,modxFunction,modxKeyword contained
-
+syn match modxResourceTag     "\v\*\w*"       contains=modxConditional,modxFunction,modxKeyword contained
+syn match modxChunkTag        "\v\$\w*"       contains=modxConditional,modxFunction,modxKeyword contained
+syn match modxSnippetTag      "\v\w*"         contains=modxConditional,modxFunction,modxKeyword contained
+syn match modxPlaceholderTag  "\v\+\w*"       contains=modxConditional,modxFunction,modxKeyword contained
+syn match modxLinkTag         "\v\~\w*"       contains=modxConditional,modxFunction,modxKeyword contained
+syn match modxSettingTag      "\v\+{2}\w*"    contains=modxConditional,modxFunction,modxKeyword contained
+syn match modxLanguageTag     "\v\%\w*"       contains=modxConditional,modxFunction,modxKeyword contained
+syn match modxCacheable       "\v!"           contained
 
 "hi def link modxTag               Keyword
 hi def link modxResourceTag       Keyword
@@ -51,9 +32,14 @@ hi def link modxPlaceholderTag    Keyword
 hi def link modxLinkTag           Keyword
 hi def link modxSettingTag        Keyword
 hi def link modxLanguageTag       Keyword
+hi def link modxCacheable         Special
 
-syn region modxParams matchgroup=String start=+`+ end=+`+ keepend contains=modxParams contained
-syn match modxParams          "\v`[a-zA-Z0-9]*`" contained
+" Regexes for Params / Properties / Filters
+syn match modxParamName           "\v\&(\w*)\=" contained
+syn match modxParamName           "\v:(\w*)\=" contained
+hi def link modxParamName         Identifier
+syn match modxParams              "\v`(\w*)`" contained
+syn match modxParams              "\v\@\w*" contained
 hi def link modxParams            String
 
 " Output Modifiers
@@ -111,9 +97,3 @@ syn keyword modxFunction isloggedin isnotloggedin contained
 hi def link modxConditional       Underlined
 hi def link modxKeyword           Function
 hi def link modxFunction          Function
-
-let b:current_syntax = 'modx'
-
-if main_syntax == 'modx'
-  unlet main_syntax
-endif
