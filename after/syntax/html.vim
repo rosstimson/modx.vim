@@ -1,8 +1,8 @@
 " Vim syntax file
 " Language: HTML (extended highlighting for MODX tags)
 " Maintainer: Ross Timson <ross@rosstimson.com>
-" Version: 0.1
-" Last Change: 12 December 2011
+" Version: 0.2
+" Last Change: 13 December 2011
 
 " Regexes for MODX tags (contained within 2 square brackets)
 "       Resource Tag / TV       [[*ResourceField / TvName ]]
@@ -13,17 +13,17 @@
 "       Setting Tag             [[++SettingName]]
 "       Language Tag            [[%LanguageStringKey]]
 
-syn region modxTag matchgroup=Type start=+\[\[+ end=+\]\]+ keepend contains=modxResourceTag,modxChunkTag,modxSnippetTag,modxPlaceholderTag,modxLinkTag,modxSettingTag,modxLanguageTag,modxParamName,modxParams,modxComment
+syn region modxTag matchgroup=Type start=+\[\[+ end=+\]\]+ contains=modxResourceTag,modxChunkTag,modxSnippetTag,modxPlaceholderTag,modxLinkTag,modxSettingTag,modxLanguageTag,modxParamName,modxParams,modxComment
 " Disinguish between cached and non-cached tags.
-syn region modxTag matchgroup=Special start=+\[\[!+ end=+\]\]+ keepend contains=modxResourceTag,modxChunkTag,modxSnippetTag,modxPlaceholderTag,modxLinkTag,modxSettingTag,modxLanguageTag,modxParamName,modxParams,modxComment
+syn region modxTag matchgroup=Special start=+\[\[!+ end=+\]\]+ contains=modxResourceTag,modxChunkTag,modxSnippetTag,modxPlaceholderTag,modxLinkTag,modxSettingTag,modxLanguageTag,modxParamName,modxParams,modxComment
 
-syn match modxResourceTag     "\v\*\w*"       contains=modxConditional,modxFunction,modxKeyword contained
-syn match modxChunkTag        "\v\$\w*"       contains=modxConditional,modxFunction,modxKeyword contained
-syn match modxSnippetTag      "\v\w*"         contains=modxConditional,modxFunction,modxKeyword contained
-syn match modxPlaceholderTag  "\v\+\w*"       contains=modxConditional,modxFunction,modxKeyword contained
-syn match modxLinkTag         "\v\~\w*"       contains=modxConditional,modxFunction,modxKeyword contained
-syn match modxSettingTag      "\v\+{2}\w*"    contains=modxConditional,modxFunction,modxKeyword contained
-syn match modxLanguageTag     "\v\%\w*"       contains=modxConditional,modxFunction,modxKeyword contained
+syn match modxResourceTag     "\v\*\w*"       contains=modxTag,modxConditional,modxFunction,modxKeyword contained
+syn match modxChunkTag        "\v\$\w*"       contains=modxTag,modxConditional,modxFunction,modxKeyword contained
+syn match modxSnippetTag      "\v\w*"         contains=modxTag,modxConditional,modxFunction,modxKeyword contained
+syn match modxPlaceholderTag  "\v\+\w*"       contains=modxTag,modxConditional,modxFunction,modxKeyword contained
+syn match modxLinkTag         "\v\~\w*"       contains=modxTag,modxConditional,modxFunction,modxKeyword contained
+syn match modxSettingTag      "\v\+{2}\w*"    contains=modxTag,modxConditional,modxFunction,modxKeyword contained
+syn match modxLanguageTag     "\v\%\w*"       contains=modxTag,modxConditional,modxFunction,modxKeyword contained
 syn match modxComment         "\v\-\w*"       contained
 
 "hi def link modxTag               Keyword
