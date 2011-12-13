@@ -44,6 +44,18 @@ syn match modxParams              "\v`(\w*)`" contained
 syn match modxParams              "\v\@\w*" contained
 hi def link modxParams            String
 
+" Add MODX tags to htmlTop cluster, HTML tags such as H1-H6, <strong>, <em>,
+" <i>, <b> etc. all inherit this - Keep HTML default highlighting but also
+" highlight MODX tags if present.
+syn cluster htmlTop contains=@Spell,htmlTag,htmlEndTag,htmlSpecialChar,htmlPreProc,htmlComment,htmlLink,javaScript,@htmlPreproc,modxTag
+" Allow MODX tag highlghting in <title>
+syn region htmlTitle start="<title\>" end="</title>"me=e-8 contains=htmlTag,htmlEndTag,htmlSpecialChar,htmlPreProc,htmlComment,javaScript,@htmlPreproc,modxTag
+" Allow MODX tags withing HTML strings including links
+syn region  htmlString   contained start=+"+ end=+"+ contains=htmlSpecialChar,javaScriptExpression,@htmlPreproc,modxTag
+syn region  htmlString   contained start=+'+ end=+'+ contains=htmlSpecialChar,javaScriptExpression,@htmlPreproc,modxTag
+" Allow MODX tag highlighting in link text
+syn region htmlLink start="<a\>\_[^>]*\<href\>" end="</a>"me=e-4 contains=@Spell,htmlTag,htmlEndTag,htmlSpecialChar,htmlPreProc,htmlComment,javaScript,@htmlPreproc,modxTag
+
 " Output Modifiers
 syn keyword modxConditional if input contained
 syn keyword modxConditional is equals eq equalto isequal isequalto contained
