@@ -5,7 +5,7 @@ Extends Vim HTML syntax highlighting to support [MODX content management system]
 **Currently MODX Revolution support only.**
 
 ## Screenshot
-![image]("http://farm8.staticflickr.com/7030/6506143589_98525d1340.jpg)
+![image](http://farm8.staticflickr.com/7030/6506143589_98525d1340.jpg)
 
 ## Help Me
 
