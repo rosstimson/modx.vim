@@ -13,7 +13,9 @@
 "       Setting Tag             [[++SettingName]]
 "       Language Tag            [[%LanguageStringKey]]
 
-syn region modxTag matchgroup=Type start=+\[\[+ end=+\]\]+ keepend contains=modxResourceTag,modxChunkTag,modxSnippetTag,modxPlaceholderTag,modxLinkTag,modxSettingTag,modxLanguageTag,modxParamName,modxParams,modxComment,modxCacheable
+syn region modxTag matchgroup=Type start=+\[\[+ end=+\]\]+ keepend contains=modxResourceTag,modxChunkTag,modxSnippetTag,modxPlaceholderTag,modxLinkTag,modxSettingTag,modxLanguageTag,modxParamName,modxParams,modxComment
+" Disinguish between cached and non-cached tags.
+syn region modxTag matchgroup=Special start=+\[\[!+ end=+\]\]+ keepend contains=modxResourceTag,modxChunkTag,modxSnippetTag,modxPlaceholderTag,modxLinkTag,modxSettingTag,modxLanguageTag,modxParamName,modxParams,modxComment
 
 syn match modxResourceTag     "\v\*\w*"       contains=modxConditional,modxFunction,modxKeyword contained
 syn match modxChunkTag        "\v\$\w*"       contains=modxConditional,modxFunction,modxKeyword contained
@@ -23,7 +25,6 @@ syn match modxLinkTag         "\v\~\w*"       contains=modxConditional,modxFunct
 syn match modxSettingTag      "\v\+{2}\w*"    contains=modxConditional,modxFunction,modxKeyword contained
 syn match modxLanguageTag     "\v\%\w*"       contains=modxConditional,modxFunction,modxKeyword contained
 syn match modxComment         "\v\-\w*"       contained
-syn match modxCacheable       "\v!"           contained
 
 "hi def link modxTag               Keyword
 hi def link modxResourceTag       Keyword
